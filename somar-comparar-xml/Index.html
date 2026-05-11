@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Análise de XMLs</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos do banner e menu do site -->
+    <style>
+        /* Reset básico apenas para os elementos do site (evita conflitos) */
+        #site-header,
+        #site-header * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #site-header {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Banner */
+        .banner {
+            width: 100%;
+            height: 130px;
+            background-image: url('../img/banner.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .banner h1 {
+            color: white;
+            font-size: 3rem;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        /* Menu de navegação */
+        nav {
+            background-color: #1d1d1d;
+            padding: 15px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 20px;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 1rem;
+        }
+
+        nav ul li a:hover {
+            background-color: #46a24a;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a.active {
+            background-color: #46a24a;
+            font-weight: bold;
+        }
+
+        /* Espaçamento extra para o conteúdo não grudar no menu */
+        .system-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Banner e menu do site -->
+    <header id="site-header">
+        <div class="banner">
+            <h1></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../">Início</a></li>
+                <li><a href="../somar-comparar-xml/" class="active">Somar e Comparar XML</a></li>
+                <li><a href="../validade-grade-duplicadas/">Validade de Grade Duplicadas</a></li>
+                <li><a href="../gerador-ean13/">Gerador de EAN13</a></li>
+                <li><a href="../unificador-arquivos-texto/">Unificador de Arquivos de Texto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Conteúdo original do sistema (envolvido em uma div para espaçamento) -->
+    <div class="system-container">
+        <div class="container">
+            <!-- Cabeçalho do Sistema -->
+            <header class="header">
+                <h1><i class="fas fa-chart-bar"></i> Sistema de Análise de XMLs</h1>
+                <div class="status-bar" id="status-bar">
+                    <span id="status-text">Pronto para importar arquivos</span>
+                    <div class="status-indicator" id="status-indicator"></div>
+                </div>
+            </header>
+
+            <!-- Navegação por Tabs -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+                <button class="tab-button" data-tab="comparar">
+                    <i class="fas fa-exchange-alt"></i> Comparar com Relatório
+                </button>
+            </div>
+
+            <!-- Área de Upload Principal -->
+            <div class="upload-section" id="upload-section">
+                <div class="upload-container">
+                    <div class="drop-zone" id="dropZoneXml">
+                        <div class="upload-icon">
+                            <i class="fas fa-file-archive fa-3x"></i>
+                        </div>
+                        <h2>Arraste XMLs ou ZIP aqui ou clique para selecionar</h2>
+                        <p class="upload-subtitle">Suporte para múltiplos arquivos XML ou um arquivo ZIP contendo XMLs
+                        </p>
+                        <input type="file" id="fileInput" multiple accept=".xml,.zip">
+                        <div class="upload-stats" id="xml-stats">
+                            <span id="xml-count">0 arquivos</span>
+                            <span id="xml-total">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo das Tabs -->
+            <div class="tab-content">
+                <!-- Tab Dashboard -->
+                <div id="dashboard" class="tab-pane active">
+                    <!-- Cards de Resumo -->
+                    <div class="summary-cards" id="summary-cards">
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Total Geral Autorizado</h3>
+                                <p class="card-value" id="total-geral">R$ 0,00</p>
+                                <p class="card-subtitle" id="total-notas">0 notas</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Período</h3>
+                                <p class="card-value" id="periodo">-</p>
+                                <p class="card-subtitle" id="dias-analisados">0 dias</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-list-ol"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Séries</h3>
+                                <p class="card-value" id="series-count">0</p>
+                                <p class="card-subtitle">Séries encontradas</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Notas Canceladas</h3>
+                                <p class="card-value" id="canceladas-count">0</p>
+                                <p class="card-subtitle">Arquivos com "Canc"</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Protocolos</h3>
+                                <p class="card-value" id="protocolos-count">0</p>
+                                <p class="card-subtitle">Arquivos com "-procEventoNFe"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação para Cancelados e Protocolos -->
+                    <div class="action-buttons-section">
+                        <button id="btn-mostrar-cancelados" class="btn-action btn-cancel">
+                            <i class="fas fa-eye"></i> Ver Notas Canceladas
+                        </button>
+                        <button id="btn-mostrar-protocolos" class="btn-action btn-protocol">
+                            <i class="fas fa-eye"></i> Ver Protocolos
+                        </button>
+                    </div>
+
+                    <!-- Análise de Sequência -->
+                    <div class="section-title">
+                        <h2><i class="fas fa-sort-numeric-down"></i> Análise de Sequência por Série
+                        </h2>
+                    </div>
+                    <div id="analise-sequencia"></div>
+
+                    <!-- Tabela de Totais por Data -->
+                    <div class="section-title">
+                        <h2><i class="fas fa-chart-line"></i> Totais por Data (Apenas Autorizadas)</h2>
+                        <button class="btn-secondary" id="btn-expandir-todos">
+                            <i class="fas fa-expand-alt"></i> Expandir Todos
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <div id="total-por-data"></div>
+                    </div>
+
+                    <!-- Detalhes da Data Selecionada -->
+                    <div id="detalhes-data"></div>
+                </div>
+
+                <!-- Tab Comparar -->
+                <div id="comparar" class="tab-pane">
+                    <div class="comparar-section">
+                        <div class="upload-container comparar-upload">
+                            <div class="drop-zone" id="dropZoneXls">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-excel fa-3x"></i>
+                                </div>
+                                <h2>Arraste XLS/XLSX ou ZIP aqui ou clique para selecionar</h2>
+                                <p class="upload-subtitle">Relatório para comparação com os XMLs importados</p>
+                                <input type="file" id="fileInputChaves" accept=".xls,.xlsx,.zip">
+                                <div class="upload-stats" id="xls-stats">
+                                    <span id="xls-status">Aguardando relatório</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comparar-info">
+                            <div class="info-box">
+                                <i class="fas fa-info-circle"></i>
+                                <p><strong>Importante:</strong> O sistema comparará automaticamente os valores dos XMLs
+                                    com
+                                    os valores do relatório.
+                                    Após importar o relatório e os XMLs, a comparação será executada automaticamente.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Área para botão de comparação manual -->
+                        <div id="area-comparacao-manual" style="text-align: center; margin: 20px 0;"></div>
+
+                        <!-- Resultados da Comparação -->
+                        <div id="resultado-comparacao"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões de Ação Fixos -->
+            <div class="action-buttons-fixed">
+                <button id="btn-reiniciar" class="btn-action btn-reset">
+                    <i class="fas fa-redo"></i> Reiniciar Sistema
+                </button>
+                <button id="btn-exportar" class="btn-action btn-export">
+                    <i class="fas fa-download"></i> Exportar Relatório
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bibliotecas e script do sistema -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
