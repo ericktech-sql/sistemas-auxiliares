@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de EAN13 - Erick Tech</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .ean-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ean-inputs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .ean-inputs input {
+            padding: 12px 15px;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            background: #2a2a3e;
+            color: #fff;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .ean-inputs input::placeholder {
+            color: #888;
+        }
+
+        .ean-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .ean-output {
+            background: #1e1e2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: #e0e0e0;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="banner">
+        <h1></h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../">Início</a></li>
+            <li><a href="../somar-comparar-xml/">Somar e Comparar XML</a></li>
+            <li><a href="../validade-grade-duplicadas/">Validade de Grade Duplicadas</a></li>
+            <li><a href="../gerador-ean13/" class="active">Gerador de EAN13</a></li>
+            <li><a href="../unificador-arquivos-texto/">Unificador de Arquivos de Texto</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div class="ean-container card" style="padding:30px;">
+            <h1 style="color:#4CAF50; display:flex; align-items:center; gap:10px; margin-bottom:25px;">
+                <i class="fas fa-barcode"></i> Gerador de EAN13
+            </h1>
+            <div class="ean-inputs">
+                <input type="text" id="baseCode" placeholder="Código base (12 dígitos)" maxlength="12">
+                <input type="number" id="rowCount" placeholder="Número de linhas" min="1">
+            </div>
+            <div class="ean-buttons">
+                <button class="btn" id="generateBtn"><i class="fas fa-cogs"></i> Gerar Códigos</button>
+                <button class="btn btn-secondary" id="copyBtn"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+            <div class="ean-output" id="output"></div>
+        </div>
+    </main>
+    <footer>&copy; 2026 Erick Tech</footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
