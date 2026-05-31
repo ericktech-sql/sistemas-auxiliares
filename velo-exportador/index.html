@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velo Exportador - Erick Tech</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .velo-card {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* CARROSSEL */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: #111;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-slide img {
+            max-width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(76, 175, 80, 0.9);
+        }
+
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active, .dot:hover {
+            background: #4CAF50;
+        }
+
+        /* OUTROS ESTILOS DA PÁGINA */
+        .section-title {
+            color: #4CAF50;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .data-table th {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4CAF50;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #e0e0e0;
+        }
+        
+        .feature-list i.fa-check-circle {
+            color: #4CAF50;
+            margin-top: 4px;
+        }
+
+        .step-list {
+            counter-reset: steps;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 20px;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-list li::before {
+            counter-increment: steps;
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4CAF50;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .download-box {
+            background: rgba(76, 175, 80, 0.05);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin: 40px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .download-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #4CAF50;
+        }
+
+        .alert-box {
+            margin-top: 20px; 
+            padding: 15px; 
+            border-left: 4px solid #FFC107; 
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header class="banner">
+        <h1></h1>
+    </header>
+    <div id="menu-container"></div>
+    <div id="menu-lateral-container"></div>
+
+    <main class="container">
+        <div class="card velo-card">
+            <h1 style="color:#4CAF50; display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i> Velo Exportador
+            </h1>
+            <p style="font-size: 1.1rem; color: #ccc; line-height: 1.6;">
+                Exporte seus dados corporativos para Excel com agilidade. Conecte-se a múltiplos bancos de dados e extraia cadastros de Produtos, Clientes/Fornecedores, Contas a Pagar e Contas a Receber em planilhas organizadas, sem precisar escrever uma linha de SQL.
+            </p>
+
+            <h2 class="section-title"><i class="fas fa-desktop"></i> Interface do Sistema</h2>
+            <p style="color: #aaa; font-style: italic; margin-bottom: 20px;">Selecione o driver do seu banco de dados e preencha as credenciais de acesso.</p>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-slides">
+                    <div class="carousel-slide"><img src="img/veloexportardor1.png" alt="Tela do Sistema 1"></div>
+                    <div class="carousel-slide"><img src="img/veloexportardor2.png" alt="Tela do Sistema 2"></div>
+                    <div class="carousel-slide"><img src="img/veloexportardor3.png" alt="Tela do Sistema 3"></div>
+                    <div class="carousel-slide"><img src="img/veloexportardor4.png" alt="Tela do Sistema 4"></div>
+                    <div class="carousel-slide"><img src="img/veloexportardor5.png" alt="Tela do Sistema 5"></div>
+                    <div class="carousel-slide"><img src="img/veloexportardor6.png" alt="Tela do Sistema 6"></div>
+                    <div class="carousel-slide"><img src="img/veloexportardor7.png" alt="Tela do Sistema 7"></div>
+                </div>
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+                <span class="dot" data-slide="4"></span>
+                <span class="dot" data-slide="5"></span>
+                <span class="dot" data-slide="6"></span>
+            </div>
+
+            <div class="download-box">
+                <h2 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-download"></i> Download e Execução</h2>
+                <p style="margin-bottom: 25px; color: #e0e0e0; font-size: 1.1rem;">Acesse a Página de Releases para baixar a versão mais recente.</p>
+                
+                <a href="https://github.com/ericktech-sql/velo-exportador.V01/releases" target="_blank" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; font-size: 1.1rem; padding: 15px 30px;">
+                    <i class="fab fa-github fa-lg"></i> Acessar Releases no GitHub
+                </a>
+                
+                <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px;">
+                    <h3 style="color: #fff; margin-bottom: 15px;"><i class="fas fa-laptop-medical"></i> Como Instalar:</h3>
+                    <ol style="margin-left: 20px; color: #bbb; line-height: 1.8;">
+                        <li>Faça o download do arquivo.</li>
+                        <li>Instale o aplicativo.</li>
+                        <li>Execute o arquivo no atalho na área de trabalho Velo Exportador.</li>
+                    </ol>
+                    <div class="alert-box">
+                        <strong><i class="fas fa-exclamation-triangle" style="color: #FFC107;"></i> Nota de Segurança:</strong><br>
+                        Por ser um software independente, o Windows SmartScreen pode exibir um aviso. Isso ocorre porque o aplicativo não possui um certificado digital de assinatura de código. Clique em <strong>"Mais informações"</strong> e depois em <strong>"Executar mesmo assim"</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Sobre o Projeto</h2>
+            <p style="color: #e0e0e0;">O Velo Exportador foi criado para simplificar a rotina de quem precisa exportar dados, gerando planilhas prontas para serem importadas no Velo Sistema.</p>
+
+            <h2 class="section-title"><i class="fas fa-star"></i> Funcionalidades Principais</h2>
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> <strong>Módulos de Negócio Específicos:</strong></li>
+                <li style="margin-left: 30px;">📦 <strong>Produtos:</strong> Código, descrição, preço de venda, estoque atual, NCM, unidade de medida e etc.</li>
+                <li style="margin-left: 30px;">👥 <strong>Pessoas:</strong> Clientes e Fornecedores.</li>
+                <li style="margin-left: 30px;">💰 <strong>Financeiro:</strong> Contas a Pagar e Contas a Receber.</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Compatibilidade com os Principais SGBDs:</strong> Funciona com MySQL, PostgreSQL, SQL Server, Firebird e SQLite.</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Formatação Automática:</strong> As planilhas geradas já saem com colunas formatadas corretamente.</li>
+            </ul>
+
+            <h2 class="section-title"><i class="fas fa-server"></i> Bancos de Dados Suportados</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>SGBD</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>MongoDB</td><td>✅ Concluído</td></tr>
+                    <tr><td>Firebird</td><td>✅ Concluído</td></tr>
+                    <tr><td>MySQL / MariaDB</td><td>✅ Concluído</td></tr>
+                    <tr><td>PostgreSQL</td><td>✅ Concluído</td></tr>
+                    <tr><td>Microsoft SQL Server</td><td>✅ Concluído</td></tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Sistemas mapeados</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Sistema</th>
+                        <th>Banco de Dados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Digisat</td><td>MongoDB</td></tr>
+                    <tr><td>Host</td><td>Firebird</td></tr>
+                    <tr><td>Gdoor</td><td>Firebird</td></tr>
+                    <tr><td>SyMac Gestão</td><td>Firebird</td></tr>
+                    <tr><td>Atmacom Polaris</td><td>Firebird</td></tr>
+                    <tr><td>Lc Sistema</td><td>Mysql</td></tr>
+                    <tr><td>Sistema Hiper (novo)</td><td>SQL Server</td></tr>
+                    <tr><td>Sistema Hiper (Legado)</td><td>SQL Server</td></tr>
+                    <tr><td>Sistema Uniplus</td><td>PostgreSQL</td></tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title"><i class="fas fa-list-ol"></i> Como Usar (Passo a Passo)</h2>
+            <ul class="step-list">
+                <li>Abra o Velo Exportador.</li>
+                <li>Abra o card do sistema desejado, clique em Configurar banco de dados, configure a "Conexão" e salve.</li>
+                <li>Após conectar, navegue pelos cards: Exportar Produtos, Exportar Pessoas, Exportar Contas a Receber, Exportar Contas a Pagar.</li>
+                <li>Clique em "Visualizar" para visualizar a prévia na grade.</li>
+                <li>Pressione "Exportar para Excel".</li>
+                <li>Selecione o destino do arquivo e salve.</li>
+            </ul>
+
+        </div>
+    </main>
+    <footer>&copy; 2026 Erick Tech</footer>
+
+    <script src="/js/menu-lateral.js"></script>
+    <script src="/js/menu.js"></script>
+    <script>
+        // Lógica do Carrossel
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.carousel-slides');
+            const slides = Array.from(track.children);
+            const nextButton = document.querySelector('.next-btn');
+            const prevButton = document.querySelector('.prev-btn');
+            const dots = Array.from(document.querySelectorAll('.dot'));
+            let currentIndex = 0;
+            let autoPlayInterval;
+
+            function updateCarousel(index) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+                updateCarousel(currentIndex);
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+                updateCarousel(currentIndex);
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            }
+
+            nextButton.addEventListener('click', () => {
+                nextSlide();
+                resetAutoPlay();
+            });
+
+            prevButton.addEventListener('click', () => {
+                prevSlide();
+                resetAutoPlay();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel(currentIndex);
+                    resetAutoPlay();
+                });
+            });
+            
+            // Iniciar Auto-play
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+    </script>
+</body>
+</html>
