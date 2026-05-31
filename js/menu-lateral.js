@@ -1,29 +1,37 @@
 (function () {
-    const menuURL = '/componentes/menu-lateral.html';
+    const scripts = document.getElementsByTagName('script');
+    let baseURL = '';
+    for (let script of scripts) {
+        if (script.src.includes('/js/menu-lateral.js')) {
+            baseURL = script.src.split('/js/menu-lateral.js')[0];
+            break;
+        }
+    }
+
+    const menuURL = baseURL + '/componentes/menu-lateral.html';
     const container = document.getElementById('menu-lateral-container');
 
-    if (!container) return; // Se não houver o container, não faz nada
+    if (!container) return; 
 
     fetch(menuURL)
         .then(response => response.text())
         .then(html => {
-            container.innerHTML = html;
+            let fixedHtml = html.replace(/href="\//g, 'href="' + baseURL + '/');
+            container.innerHTML = fixedHtml;
             ativarSubmenus();
         })
         .catch(error => console.error('Erro ao carregar menu lateral:', error));
 
     function ativarSubmenus() {
-        // Seleciona apenas os links que controlam um submenu
         const toggles = document.querySelectorAll('.has-submenu > .menu-link');
 
         toggles.forEach(link => {
             link.addEventListener('click', function (e) {
-                e.preventDefault(); // Evita que a página role para o topo
+                e.preventDefault(); 
                 const parent = this.parentElement;
                 const submenu = parent.querySelector('.submenu');
                 const icon = this.querySelector('.submenu-icon');
 
-                // Fecha outros submenus abertos (opcional)
                 document.querySelectorAll('.submenu.aberto').forEach(aberto => {
                     if (aberto !== submenu) {
                         aberto.classList.remove('aberto');
@@ -32,9 +40,7 @@
                     }
                 });
 
-                // Alterna o estado do submenu atual
                 submenu.classList.toggle('aberto');
-                // Rotaciona o ícone
                 if (submenu.classList.contains('aberto')) {
                     icon.style.transform = 'rotate(90deg)';
                 } else {
