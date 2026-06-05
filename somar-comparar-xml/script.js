@@ -973,7 +973,7 @@ function mostrarResultadosComparacao(faltantesXML, faltantesXMLCanceladas, falta
     if (faltantesXLS.length > 0) {
         html += `<div class="tabela-comparacao"><h3><i class="fas fa-file-excel"></i> Chaves no Relatório Ausentes nos XMLs (${faltantesXLS.length})</h3><div class="table-responsive"><table><thead><tr><th>Número</th><th>Chave</th><th>Valor no XLS</th></tr></thead><tbody>`;
         faltantesXLS.forEach(item => {
-            html += `<tr class="status-ausente"><td>${item.nNF}</td><td class="chave">${formatarChave(item.chave)}</td><td class="valor-cell">${formatador.format(item.valorXLS)}</td></tr>`;
+            html += `<tr class="status-ausente"><td>${item.nNF}</td><td class="chave">${item.chave}</td><td class="valor-cell">${formatador.format(item.valorXLS)}</td></tr>`;
         });
         html += `</tbody></table></div></div>`;
     }
