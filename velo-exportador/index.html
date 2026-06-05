@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@
             margin: 30px auto;
             overflow: hidden;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             background: #111;
         }
 
@@ -66,8 +67,13 @@
             background: rgba(76, 175, 80, 0.9);
         }
 
-        .prev-btn { left: 15px; }
-        .next-btn { right: 15px; }
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
 
         .carousel-dots {
             text-align: center;
@@ -85,7 +91,8 @@
             transition: background 0.3s;
         }
 
-        .dot.active, .dot:hover {
+        .dot.active,
+        .dot:hover {
             background: #4CAF50;
         }
 
@@ -109,13 +116,14 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        
-        .data-table th, .data-table td {
+
+        .data-table th,
+        .data-table td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .data-table th {
             background: rgba(76, 175, 80, 0.15);
             color: #4CAF50;
@@ -133,7 +141,7 @@
             gap: 10px;
             color: #e0e0e0;
         }
-        
+
         .feature-list i.fa-check-circle {
             color: #4CAF50;
             margin-top: 4px;
@@ -171,7 +179,7 @@
             justify-content: center;
             font-size: 1rem;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .download-box {
@@ -183,23 +191,24 @@
             margin: 40px 0;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        
+
         .download-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             border-color: #4CAF50;
         }
 
         .alert-box {
-            margin-top: 20px; 
-            padding: 15px; 
-            border-left: 4px solid #FFC107; 
+            margin-top: 20px;
+            padding: 15px;
+            border-left: 4px solid #FFC107;
             background: rgba(255, 193, 7, 0.1);
             border-radius: 0 8px 8px 0;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
     <header class="banner">
         <h1></h1>
@@ -213,12 +222,15 @@
                 <i class="fa-solid fa-arrow-up-from-bracket"></i> Velo Exportador
             </h1>
             <p style="font-size: 1.1rem; color: #ccc; line-height: 1.6;">
-                Exporte seus dados corporativos para Excel com agilidade. Conecte-se a múltiplos bancos de dados e extraia cadastros de Produtos, Clientes/Fornecedores, Contas a Pagar e Contas a Receber em planilhas organizadas, sem precisar escrever uma linha de SQL.
+                Exporte seus dados corporativos para Excel com agilidade. Conecte-se a múltiplos bancos de dados e
+                extraia cadastros de Produtos, Clientes/Fornecedores, Contas a Pagar e Contas a Receber em planilhas
+                organizadas, sem precisar escrever uma linha de SQL.
             </p>
 
             <h2 class="section-title"><i class="fas fa-desktop"></i> Interface do Sistema</h2>
-            <p style="color: #aaa; font-style: italic; margin-bottom: 20px;">Selecione o driver do seu banco de dados e preencha as credenciais de acesso.</p>
-            
+            <p style="color: #aaa; font-style: italic; margin-bottom: 20px;">Selecione o driver do seu banco de dados e
+                preencha as credenciais de acesso.</p>
+
             <div class="carousel-container">
                 <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-slides">
@@ -243,38 +255,49 @@
             </div>
 
             <div class="download-box">
-                <h2 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-download"></i> Download e Execução</h2>
-                <p style="margin-bottom: 25px; color: #e0e0e0; font-size: 1.1rem;">Acesse a Página de Releases para baixar a versão mais recente.</p>
-                
-                <a href="https://github.com/ericktech-sql/velo-exportador.V01/releases" target="_blank" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; font-size: 1.1rem; padding: 15px 30px;">
+                <h2 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-download"></i> Download e Execução
+                </h2>
+                <p style="margin-bottom: 25px; color: #e0e0e0; font-size: 1.1rem;">Acesse a Página de Releases para
+                    baixar a versão mais recente.</p>
+
+                <a href="https://github.com/ericktech-sql/velo-exportador.V01/releases" target="_blank" class="btn"
+                    style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; font-size: 1.1rem; padding: 15px 30px;">
                     <i class="fab fa-github fa-lg"></i> Acessar Releases no GitHub
                 </a>
-                
+
                 <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px;">
-                    <h3 style="color: #fff; margin-bottom: 15px;"><i class="fas fa-laptop-medical"></i> Como Instalar:</h3>
+                    <h3 style="color: #fff; margin-bottom: 15px;"><i class="fas fa-laptop-medical"></i> Como Instalar:
+                    </h3>
                     <ol style="margin-left: 20px; color: #bbb; line-height: 1.8;">
                         <li>Faça o download do arquivo.</li>
                         <li>Instale o aplicativo.</li>
                         <li>Execute o arquivo no atalho na área de trabalho Velo Exportador.</li>
                     </ol>
                     <div class="alert-box">
-                        <strong><i class="fas fa-exclamation-triangle" style="color: #FFC107;"></i> Nota de Segurança:</strong><br>
-                        Por ser um software independente, o Windows SmartScreen pode exibir um aviso. Isso ocorre porque o aplicativo não possui um certificado digital de assinatura de código. Clique em <strong>"Mais informações"</strong> e depois em <strong>"Executar mesmo assim"</strong>.
+                        <strong><i class="fas fa-exclamation-triangle" style="color: #FFC107;"></i> Nota de
+                            Segurança:</strong><br>
+                        Por ser um software independente, o Windows SmartScreen pode exibir um aviso. Isso ocorre porque
+                        o aplicativo não possui um certificado digital de assinatura de código. Clique em <strong>"Mais
+                            informações"</strong> e depois em <strong>"Executar mesmo assim"</strong>.
                     </div>
                 </div>
             </div>
 
             <h2 class="section-title"><i class="fas fa-info-circle"></i> Sobre o Projeto</h2>
-            <p style="color: #e0e0e0;">O Velo Exportador foi criado para simplificar a rotina de quem precisa exportar dados, gerando planilhas prontas para serem importadas no Velo Sistema.</p>
+            <p style="color: #e0e0e0;">O Velo Exportador foi criado para simplificar a rotina de quem precisa exportar
+                dados, gerando planilhas prontas para serem importadas no Velo Sistema.</p>
 
             <h2 class="section-title"><i class="fas fa-star"></i> Funcionalidades Principais</h2>
             <ul class="feature-list">
                 <li><i class="fas fa-check-circle"></i> <strong>Módulos de Negócio Específicos:</strong></li>
-                <li style="margin-left: 30px;">📦 <strong>Produtos:</strong> Código, descrição, preço de venda, estoque atual, NCM, unidade de medida e etc.</li>
+                <li style="margin-left: 30px;">📦 <strong>Produtos:</strong> Código, descrição, preço de venda, estoque
+                    atual, NCM, unidade de medida e etc.</li>
                 <li style="margin-left: 30px;">👥 <strong>Pessoas:</strong> Clientes e Fornecedores.</li>
                 <li style="margin-left: 30px;">💰 <strong>Financeiro:</strong> Contas a Pagar e Contas a Receber.</li>
-                <li><i class="fas fa-check-circle"></i> <strong>Compatibilidade com os Principais SGBDs:</strong> Funciona com MySQL, PostgreSQL, SQL Server, Firebird e SQLite.</li>
-                <li><i class="fas fa-check-circle"></i> <strong>Formatação Automática:</strong> As planilhas geradas já saem com colunas formatadas corretamente.</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Compatibilidade com os Principais SGBDs:</strong>
+                    Funciona com MySQL, PostgreSQL, SQL Server, Firebird e SQLite.</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Formatação Automática:</strong> As planilhas geradas já
+                    saem com colunas formatadas corretamente.</li>
             </ul>
 
             <h2 class="section-title"><i class="fas fa-server"></i> Bancos de Dados Suportados</h2>
@@ -286,11 +309,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>MongoDB</td><td>✅ Concluído</td></tr>
-                    <tr><td>Firebird</td><td>✅ Concluído</td></tr>
-                    <tr><td>MySQL / MariaDB</td><td>✅ Concluído</td></tr>
-                    <tr><td>PostgreSQL</td><td>✅ Concluído</td></tr>
-                    <tr><td>Microsoft SQL Server</td><td>✅ Concluído</td></tr>
+                    <tr>
+                        <td>MongoDB</td>
+                        <td>✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>Firebird</td>
+                        <td>✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>MySQL / MariaDB</td>
+                        <td>✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>PostgreSQL</td>
+                        <td>✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>Microsoft SQL Server</td>
+                        <td>✅ Concluído</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -303,23 +341,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Digisat</td><td>MongoDB</td></tr>
-                    <tr><td>Host</td><td>Firebird</td></tr>
-                    <tr><td>Gdoor</td><td>Firebird</td></tr>
-                    <tr><td>SyMac Gestão</td><td>Firebird</td></tr>
-                    <tr><td>Atmacom Polaris</td><td>Firebird</td></tr>
-                    <tr><td>Lc Sistema</td><td>Mysql</td></tr>
-                    <tr><td>Sistema Hiper (novo)</td><td>SQL Server</td></tr>
-                    <tr><td>Sistema Hiper (Legado)</td><td>SQL Server</td></tr>
-                    <tr><td>Sistema Uniplus</td><td>PostgreSQL</td></tr>
+                    <tr>
+                        <td>Atmacom Polaris</td>
+                        <td>Firebird</td>
+                    </tr>
+                    <tr>
+                        <td>Digisat</td>
+                        <td>MongoDB</td>
+                    </tr>
+                    <tr>
+                        <td>Gdoor</td>
+                        <td>Firebird</td>
+                    </tr>
+                    <tr>
+                        <td>Gestão Fácil</td>
+                        <td>Mysql</td>
+                    </tr>
+                    <tr>
+                        <td>Sistema Hiper (novo)</td>
+                        <td>SQL Server</td>
+                    </tr>
+                    <tr>
+                        <td>Sistema Hiper (Legado)</td>
+                        <td>SQL Server</td>
+                    </tr>
+                    <tr>
+                        <td>Host</td>
+                        <td>Firebird</td>
+                    </tr>
+                    <tr>
+                        <td>Lc Sistema</td>
+                        <td>Mysql</td>
+                    </tr>
+                    <tr>
+                        <td>SyMac Gestão</td>
+                        <td>Firebird</td>
+                    </tr>
+                    <tr>
+                        <td>Sistema Uniplus</td>
+                        <td>PostgreSQL</td>
+                    </tr>
                 </tbody>
             </table>
 
             <h2 class="section-title"><i class="fas fa-list-ol"></i> Como Usar (Passo a Passo)</h2>
             <ul class="step-list">
                 <li>Abra o Velo Exportador.</li>
-                <li>Abra o card do sistema desejado, clique em Configurar banco de dados, configure a "Conexão" e salve.</li>
-                <li>Após conectar, navegue pelos cards: Exportar Produtos, Exportar Pessoas, Exportar Contas a Receber, Exportar Contas a Pagar.</li>
+                <li>Abra o card do sistema desejado, clique em Configurar banco de dados, configure a "Conexão" e salve.
+                </li>
+                <li>Após conectar, navegue pelos cards: Exportar Produtos, Exportar Pessoas, Exportar Contas a Receber,
+                    Exportar Contas a Pagar.</li>
                 <li>Clique em "Visualizar" para visualizar a prévia na grade.</li>
                 <li>Pressione "Exportar para Excel".</li>
                 <li>Selecione o destino do arquivo e salve.</li>
@@ -380,10 +451,11 @@
                     resetAutoPlay();
                 });
             });
-            
+
             // Iniciar Auto-play
             autoPlayInterval = setInterval(nextSlide, 5000);
         });
     </script>
 </body>
+
 </html>
