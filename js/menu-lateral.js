@@ -19,6 +19,7 @@
             let fixedHtml = html.replace(/href="\//g, 'href="' + baseURL + '/');
             container.innerHTML = fixedHtml;
             ativarSubmenus();
+            configurarToggle();
         })
         .catch(error => console.error('Erro ao carregar menu lateral:', error));
 
@@ -47,6 +48,20 @@
                     icon.style.transform = 'rotate(0deg)';
                 }
             });
+        });
+    }
+
+    function configurarToggle() {
+        const menu = document.getElementById('menu-lateral');
+        const toggleBtn = document.getElementById('toggle-menu');
+        
+        if (!menu || !toggleBtn) return;
+
+        // Inicia recolhido por padrão em todas as páginas
+        menu.classList.add('collapsed');
+
+        toggleBtn.addEventListener('click', () => {
+            menu.classList.toggle('collapsed');
         });
     }
 })();

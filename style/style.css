@@ -315,10 +315,61 @@ footer {
     z-index: 50;
     padding: 20px 10px;
     width: 290px;
+    transition: width 0.3s ease;
 
     /* Limita a altura máxima e permite que os submenus vazem para fora */
     max-height: calc(100vh - 40px);
     overflow: visible;
+}
+
+/* Header e botão toggle */
+.menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 0 5px;
+}
+
+.toggle-btn:hover {
+    color: #46a24a;
+}
+
+/* Estado recolhido */
+.menu-lateral.collapsed {
+    width: 70px;
+}
+
+.menu-lateral.collapsed .menu-header {
+    justify-content: center;
+}
+
+.menu-lateral.collapsed .menu-link span {
+    display: none;
+}
+
+.menu-lateral.collapsed .menu-link {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.menu-lateral.collapsed .menu-link i {
+    width: auto;
+    font-size: 1.4rem;
+}
+
+.menu-lateral.collapsed .submenu-icon {
+    display: none;
 }
 
 .menu-lateral-lista {
