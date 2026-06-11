@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box;
+}
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+.card {
+    background: #ffffff;
+    border-radius: 32px;
+    padding: 24px 30px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    border: 1px solid #334155;
+}
+.card h1 {
+    font-size: 1.8rem;
+    margin: 0 0 6px 0;
+    background: linear-gradient(135deg, #0f2b3d, #1e4a76);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.sub {
+    color: #334155;
+    border-left: 4px solid #3b82f6;
+    padding-left: 16px;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+    background: #f1f5f9;
+    padding: 20px 24px;
+    border-radius: 28px;
+    margin-top: 16px;
+}
+.ctrl-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.ctrl-group label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #1e293b;
+    letter-spacing: 0.5px;
+}
+.ctrl-group input {
+    background: white;
+    border: 1px solid #cbd5e1;
+    padding: 10px 16px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    width: 140px;
+    transition: 0.2s;
+    color: #1e293b;
+}
+.ctrl-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+.controls button, .file-label {
+    background: #1e293b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 40px;
+    transition: 0.2s;
+    font-size: 0.85rem;
+    display: inline-block;
+    text-align: center;
+}
+.controls button:hover, .file-label:hover {
+    background: #0f172a;
+    transform: translateY(-1px);
+}
+.file-input {
+    display: none;
+}
+/* Botão de upload com contraste garantido */
+.upload-btn {
+    background: #0f3b5c;
+    color: white;
+    border: none;
+}
+.upload-btn:hover {
+    background: #0a2a42;
+}
+.status {
+    margin-left: auto;
+    background: #e0f2fe;
+    border-radius: 40px;
+    padding: 8px 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #0c4a6e;
+}
+/* Filtro */
+.filter-area {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #f8fafc;
+    padding: 12px 20px;
+    border-radius: 60px;
+    color: #1e293b;
+}
+.filter-area label {
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+.filter-area input {
+    flex: 1;
+    min-width: 240px;
+    padding: 10px 18px;
+    border-radius: 40px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    font-size: 0.85rem;
+    color: #1e293b;
+}
+.filter-area input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 28px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    min-width: 1100px;
+    color: #1e293b;
+}
+th {
+    background: #f1f5f9;
+    padding: 14px 10px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #eef2ff;
+    vertical-align: top;
+    text-align: center;
+}
+.prod-name {
+    text-align: left;
+    max-width: 280px;
+    font-weight: 500;
+    word-break: break-word;
+}
+.impostos-cell {
+    text-align: left;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    background: #fefcf5;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+}
+.valor-num {
+    font-family: monospace;
+    font-weight: 600;
+}
+.suggested {
+    background: #e0f2fe;
+    font-weight: 700;
+    color: #0369a1;
+    border-radius: 8px;
+}
+.legend {
+    font-size: 0.7rem;
+    background: #fef9e3;
+    border-radius: 24px;
+    padding: 8px 20px;
+    margin-top: 20px;
+    display: inline-block;
+    border-left: 4px solid #f59e0b;
+    color: #1e293b;
+}
+.footer-totals {
+    margin-top: 24px;
+    background: #f1f5f9;
+    border-radius: 24px;
+    padding: 18px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #1e293b;
+}
+.no-results {
+    padding: 40px;
+    text-align: center;
+    color: #475569;
+}
+@media (max-width: 700px) {
+    .container { padding: 16px; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .status { margin-left: 0; text-align: center; }
+}
