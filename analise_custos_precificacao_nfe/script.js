@@ -29,6 +29,7 @@ async function parseXMLAndExtract(xmlString) {
         const xProd = getTagText(prod, "xProd") || "Sem descrição";
         const qCom = parseFloat(getTagText(prod, "qCom") || "0");
         const vProd = parseFloat(getTagText(prod, "vProd") || "0");
+        const vDesc = parseFloat(getTagText(prod, "vDesc") || "0");
         if (qCom === 0) continue;
 
         let vICMS = 0, vIPI = 0, vPIS = 0, vCOFINS = 0;
@@ -84,6 +85,7 @@ async function parseXMLAndExtract(xmlString) {
             produto: xProd,
             quantidade: qCom,
             valorTotalProduto: vProd,
+            vDesc,
             vICMS, vIPI, vPIS, vCOFINS, vICMSST, vFCPST, vIBS, vCBS,
             impostosEfetivos: vIPI + vICMSST + vFCPST   // apenas esses entram no custo
         });
@@ -125,11 +127,14 @@ function renderTabelaComFiltro(itensFiltrados, markupPercent, freteTotal, seguro
         return;
     }
 
+    const somaValorTodos = itensProdutos.reduce((acc, i) => acc + i.valorTotalProduto, 0) || 1;
+
     let somaCustoRealTotal = 0;
     let somaImpostosEfetivosTotal = 0;
     let somaImpostosDemoTotal = 0;
     let somaFreteRateado = 0;
     let somaSeguroRateado = 0;
+    let somaDescTotal = 0;
     let quantidadeTotal = 0;
     const rows = [];
 
@@ -138,10 +143,10 @@ function renderTabelaComFiltro(itensFiltrados, markupPercent, freteTotal, seguro
         const quant = item.quantidade;
         quantidadeTotal += quant;
 
-        const rateioFrete = (valorProd / somaValorProdutos) * freteTotal;
-        const rateioSeguro = (valorProd / somaValorProdutos) * seguroTotal;
+        const rateioFrete = (valorProd / somaValorTodos) * freteTotal;
+        const rateioSeguro = (valorProd / somaValorTodos) * seguroTotal;
 
-        const custoRealItem = valorProd + item.impostosEfetivos + rateioFrete + rateioSeguro;
+        const custoRealItem = valorProd + item.impostosEfetivos + rateioFrete + rateioSeguro - (item.vDesc || 0);
         const custoUnitarioReal = custoRealItem / quant;
         const precoVenda = custoUnitarioReal * (1 + markupPercent / 100);
 
@@ -150,8 +155,10 @@ function renderTabelaComFiltro(itensFiltrados, markupPercent, freteTotal, seguro
         somaImpostosDemoTotal += (item.vICMS + item.vIPI + item.vPIS + item.vCOFINS + item.vICMSST + item.vFCPST + item.vIBS + item.vCBS);
         somaFreteRateado += rateioFrete;
         somaSeguroRateado += rateioSeguro;
+        somaDescTotal += (item.vDesc || 0);
 
         const detalhes = [];
+        if (item.vDesc && item.vDesc !== 0) detalhes.push(`➖ Desconto (vDesc): R$ ${item.vDesc.toFixed(2)} ✔️ (Subtrai do custo)`);
         if (item.vICMS !== 0) detalhes.push(`ICMS: R$ ${item.vICMS.toFixed(2)} ⚠️ (demonstrativo)`);
         if (item.vIPI !== 0) detalhes.push(`IPI: R$ ${item.vIPI.toFixed(2)} ✔️ (Contabiliza no custo)`);
         if (item.vPIS !== 0) detalhes.push(`PIS: R$ ${item.vPIS.toFixed(2)} ⚠️ (demonstrativo)`);
@@ -184,7 +191,8 @@ function renderTabelaComFiltro(itensFiltrados, markupPercent, freteTotal, seguro
         <div><strong>📋 Impostos demonstrativos (ICMS+PIS+COFINS+IBS+CBS):</strong> R$ ${impostosDemoOnly.toFixed(2)}<br><span style="font-size:0.7rem;">⚠️ Não integram o custo final.</span></div>
         <div><strong>✔️ Impostos que impactam custo (IPI+ICMS ST+FCP ST):</strong> R$ ${somaImpostosEfetivosTotal.toFixed(2)}</div>
         <div><strong>🚚 Frete rateado:</strong> R$ ${somaFreteRateado.toFixed(2)} &nbsp;| <strong>📦 Seguro rateado:</strong> R$ ${somaSeguroRateado.toFixed(2)}</div>
-        <div><strong>💵 CUSTO REAL TOTAL (Produtos + Efetivos + Frete + Seguro):</strong> R$ ${somaCustoRealTotal.toFixed(2)}</div>
+        ${somaDescTotal > 0 ? `<div><strong>➖ Desconto total (vDesc):</strong> R$ ${somaDescTotal.toFixed(2)}</div>` : ''}
+        <div><strong>💵 CUSTO REAL TOTAL (Produtos + Efetivos + Frete + Seguro ${somaDescTotal > 0 ? '- Desconto' : ''}):</strong> R$ ${somaCustoRealTotal.toFixed(2)}</div>
         <div><strong>🏷️ Markup aplicado:</strong> ${markupPercent}% &nbsp;| <strong>Preço médio venda sugerido (unitário):</strong> R$ ${(somaCustoRealTotal / quantidadeTotal).toFixed(2)}</div>
     `;
 }
